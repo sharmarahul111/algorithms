@@ -15,7 +15,7 @@ def random_point():
 for i in range(samples):
     x,y = random_point()
     if x**2 + y**2 <= 1:
-        in_circle = in_circle+1
+        in_circle += 1
 
 # Using sin/cos
 # for i in range(samples):

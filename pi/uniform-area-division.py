@@ -21,7 +21,7 @@ for i in range(divisions):
         x = i/divisions
         y = j/divisions
         if x**2 + y**2 <= 1:
-            in_circle = in_circle+1
+            in_circle += 1
 
 print()
 pi = 4*in_circle/(divisions**2)
