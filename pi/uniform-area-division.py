@@ -7,10 +7,6 @@ divisions = 5000
 radius = 1
 in_circle = 0
 
-def random_point():
-    x = random.random()*2-1
-    y = random.random()*2-1
-    return x,y
 
 # Using equation of circle
 for i in range(divisions):
@@ -28,5 +24,5 @@ pi = 4*in_circle/(divisions**2)
 print("Total points:", divisions**2)
 print("In circle:", in_circle)
 print("Estimated value of π =", pi)
-error = round(abs(math.pi-pi)/math.pi*100,3)
+error = round(abs(math.pi-pi)/math.pi*100, 3)
 print(f"Percentage error = {error}%")
