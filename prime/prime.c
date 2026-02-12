@@ -10,7 +10,7 @@ int main(){
     printf("File couldn't be opened!\n");
     return 1;
   }
-  int count = 7000000;
+  int count = 20000000;
   int i,n;
   int is_prime=1;
   int leny = 1;
