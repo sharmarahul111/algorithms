@@ -1,20 +1,28 @@
 #include<stdio.h>
+#define BUF_SIZE 65536
 int main(){
   FILE *fp;
-  fp = fopen("data.csv", "w");
+  char buffer[BUF_SIZE];
+  size_t pos= 0;
+  fp = fopen("data.csv", "wb");
   if(fp==NULL) {
     printf("File couldn't be opened!\n");
     return 1;
   }
-  int count = 80000;
-  int i;
+  int count = 519271;
+  int i,n;
   int is_prime=1;
   int leny = 1;
-  int y[count];
+  long long int y[count];
+  // for pre computed squares
+  long long int y2[count];
   y[0] = 2;
-  int x = 3;
+  y2[0] = 4;
+
+  long long int x = 3;
   while(leny < count){
     for (i=0;i<leny;i++) {
+      if (y2[i]> x) break;
       if(x%y[i]==0){
         is_prime = 0;
         break;
@@ -22,17 +30,24 @@ int main(){
     }
     if(is_prime){
       y[leny] = x;
+      y2[leny] = x*x;
       leny++;
     } else is_prime = 1;
     x+=2;
-    printf("\r%.2f%%",(float) leny/count*100);
+    if(leny%500==0) printf("\r%.2f%%",(float) leny/count*100);
   }
   printf("\nPrimes generated!");
   printf("\nSaving to file");
+  // save logic
   for (i=0;i<leny-1;i++) {
-    fprintf(fp, "%d,",y[i]);
+    int n = snprintf(buffer + pos, BUF_SIZE - pos, "%lld,", y[i]);
+    pos += n;
+    if (pos >= BUF_SIZE - 50) {
+      fwrite(buffer,1,pos,fp);
+      pos = 0;
+    }
   }
-  fprintf(fp,"%d", y[i]);
+  if (pos > 0) fwrite(buffer, 1, pos, fp);
   fclose(fp);
   printf("\rSuccessfully saved to file!\n");
   return 0;
