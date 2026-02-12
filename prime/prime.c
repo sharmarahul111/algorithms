@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 #define BUF_SIZE 65536
 int main(){
   FILE *fp;
@@ -9,13 +10,17 @@ int main(){
     printf("File couldn't be opened!\n");
     return 1;
   }
-  int count = 519271;
+  int count = 7000000;
   int i,n;
   int is_prime=1;
   int leny = 1;
-  long long int y[count];
-  // for pre computed squares
-  long long int y2[count];
+  // DMA cuz stack can't handle it
+  long long *y  = malloc(count * sizeof(long long));
+  long long *y2 = malloc(count * sizeof(long long));
+  if (!y || !y2) {
+    printf("Memory allocation failed\n");
+    return 1;
+  }
   y[0] = 2;
   y2[0] = 4;
 
@@ -34,7 +39,7 @@ int main(){
       leny++;
     } else is_prime = 1;
     x+=2;
-    if(leny%500==0) printf("\r%.2f%%",(float) leny/count*100);
+    if(leny%5000==0) printf("\r%.2f%%",(float) leny/count*100);
   }
   printf("\nPrimes generated!");
   printf("\nSaving to file");
