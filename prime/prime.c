@@ -26,7 +26,7 @@ int main(){
 
   long long int x = 3;
   while(leny < count){
-    for (i=0;i<leny;i++) {
+    for (i=1;i<leny;i++) {
       if (y2[i]> x) break;
       if(x%y[i]==0){
         is_prime = 0;

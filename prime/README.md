@@ -1,6 +1,11 @@
 # Primes
 Computing and analyzing first N prime numbers
 Current status: 20M in ~10 minutes (in C)
+## Optimizations
+- mod only by previous primes (not every number) 🚀
+- stop at √n for if n is prime 🚀
+- increment mod operand by 2 (evens don't matter) 🐢
+- don't mod by 2 🐢
 ## TODO:
 - A program which starts where it left computing primes
 - efficient storage of the primes (in binary)
