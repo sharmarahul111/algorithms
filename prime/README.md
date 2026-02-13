@@ -13,6 +13,7 @@ Current status: 20M in ~10 minutes (in C)
   - analyze the data of primes in various graphs
   - logs, diffs, number of primes, etc
   - try to see the nature of primes
-
+- only store next square not all
+- make prime array 32bit for now
 - compute upto 100M primes somehow
-- learn a better approach to do that
+- learn a better approach to do that (sieve)
