@@ -3,18 +3,11 @@
 #define BUF_SIZE 65536
 void display(unsigned char *);
 void prime_count(unsigned char *);
-int count = 100;
-// size_t count = 800000000;
+void save(unsigned char *);
+// int count = 100;
+size_t count = 1000000;
 // size_t count = 32452842;
 int main(){
-  FILE *fp;
-  char buffer[BUF_SIZE];
-  size_t pos= 0;
-  fp = fopen("sieve-data.csv", "wb");
-  if(fp==NULL) {
-    printf("File couldn't be opened!\n");
-    return 1;
-  }
   // DMA cuz stack can't handle it
   size_t i,j;
   unsigned char *y  = calloc(count, sizeof(unsigned char));
@@ -35,21 +28,7 @@ int main(){
   printf("\n");
   prime_count(y);
   // display(y);
-  printf("Saving to file...");
-  // save logic
-  for (i=0;i<count;i++) {
-    if(y[i]) continue;
-    int n = snprintf(buffer + pos, BUF_SIZE - pos, "%zu,", i);
-    pos += n;
-    if (pos >= BUF_SIZE - 50) {
-      fwrite(buffer,1,pos,fp);
-      pos = 0;
-    }
-  }
-  if (pos > 0) fwrite(buffer, 1, pos, fp);
-  fclose(fp);
-  free(y);
-  printf("\rSuccessfully saved to file!\n");
+  save(y);
   return 0;
 
 }
@@ -69,4 +48,32 @@ void prime_count(unsigned char *y){
     if(y[i]==0) len++;
   }
   printf("Total primes generated: %zu\n",len);
+}
+
+void save(unsigned char *y){
+  printf("Saving to file...");
+  FILE *fp;
+  char buffer[BUF_SIZE];
+  size_t pos= 0;
+  fp = fopen("sieve-data.csv", "wb");
+  if(fp==NULL) {
+    printf("File couldn't be opened!\n");
+    exit(1);
+  }
+  // save logic
+  size_t i;
+  for (i=0;i<count;i++) {
+    if(y[i]) continue;
+    int n = snprintf(buffer + pos, BUF_SIZE - pos, "%zu,", i);
+    pos += n;
+    if (pos >= BUF_SIZE - 50) {
+      fwrite(buffer,1,pos,fp);
+      pos = 0;
+    }
+  }
+  if (pos > 0) fwrite(buffer, 1, pos, fp);
+  fclose(fp);
+  free(y);
+  printf("\rSuccessfully saved to file!\n");
+
 }
