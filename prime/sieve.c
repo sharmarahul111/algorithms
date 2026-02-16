@@ -20,7 +20,7 @@ int main(){
   // 1 = non-prime
   y[0] = 1;
   y[1] = 1;
-  for (i=0;i<count;i++) {
+  for (i=0;i*i<count;i++) {
     if(i%100000==0) printf("\r%.2f%%",(float) i/count*100);
     if(y[i]) continue;
     for (j=i+i;j<count;j+=i) y[j]=1;
