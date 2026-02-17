@@ -5,7 +5,7 @@ void display(unsigned char *);
 void prime_count(unsigned char *);
 void save(unsigned char *);
 // int count = 100;
-size_t count = 1000000;
+size_t count = 1000000000;
 // size_t count = 32452842;
 int main(){
   // DMA cuz stack can't handle it

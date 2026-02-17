@@ -2,6 +2,7 @@
 Computing and analyzing first N prime numbers
 Current status: 20M in ~10 minutes (in C)
 Update: 41M in ~ minute with sieve method
+Update: 50M in 50 seconds with `-O2` compiler flag
 ## Optimizations
 - mod only by previous primes (not every number) 🚀
 - stop at √n for if n is prime 🚀
